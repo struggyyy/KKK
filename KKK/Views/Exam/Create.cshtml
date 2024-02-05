@@ -1,0 +1,26 @@
+﻿@model KKK.Models.Note
+
+@{
+    ViewData["Title"] = "Utwórz notatkę";
+}
+
+<h2>Utwórz notatkę</h2>
+
+<form asp-controller="Exam" asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Title">Tytuł</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Content">Treść</label>
+        <textarea asp-for="Content" class="form-control"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Deadline">Data ważności</label>
+        <input asp-for="Deadline" type="datetime-local" class="form-control" />
+        <span asp-validation-for="Deadline" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Utwórz</button>
+</form>
