@@ -8,7 +8,7 @@ namespace KKK.Models
     public class NoteService
     {
         private readonly IDateProvider _dateProvider;
-        private readonly List<Note> _notes;
+        private readonly List<Note> _notes = new List<Note>();
 
         public NoteService(IDateProvider dateProvider)
         {
@@ -18,10 +18,17 @@ namespace KKK.Models
 
         public void Add(Note note)
         {
-            _notes.Add(note);
+            if (note != null)
+            {
+                _notes.Add(note);
+            }
+            else
+            {
+                // Obsługa przypadku, gdy obiekt note jest null
+            }
         }
 
-        public List<Note> GetAll()
+            public List<Note> GetAll()
         {
             return _notes.Where(note => note.Deadline > _dateProvider.CurrentDate).ToList();
         }

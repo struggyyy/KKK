@@ -1,5 +1,23 @@
-﻿@{
+﻿@model List<Note>
+
+@{
     ViewData["Title"] = "Lista notatek";
 }
 
-<h1>Lista notatek</h1>
+<h2>Lista notatek</h2>
+
+@if (Model != null && Model.Any())
+{
+    <ul>
+        @foreach (var note in Model)
+        {
+            <li>
+                <a asp-controller="Exam" asp-action="Details" asp-route-title="@note.Title">@note.Title</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Brak ważnych notatek do wyświetlenia.</p>
+}

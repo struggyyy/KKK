@@ -9,10 +9,10 @@ namespace KKK.Controllers
         private readonly IDateProvider _dateProvider;
         private readonly NoteService _noteService;
 
-        public ExamController(IDateProvider dateProvider, NoteService noteService)
+        public ExamController(NoteService noteService, IDateProvider dateProvider)
         {
-            _dateProvider = dateProvider;
             _noteService = noteService;
+            _dateProvider = dateProvider;
         }
 
         [HttpGet]
@@ -20,6 +20,19 @@ namespace KKK.Controllers
         {
             var notes = _noteService.GetAll();
             return View(notes);
+        }
+
+        [HttpGet]
+        public IActionResult Details(string title)
+        {
+            var note = _noteService.GetById(title);
+
+            if (note == null)
+            {
+                return NotFound();
+            }
+
+            return View(note);
         }
 
         [HttpGet]
